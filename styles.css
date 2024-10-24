@@ -20,3 +20,20 @@ body {
         color: rgb(255, 102, 0);
     }
 }
+
+.container {
+    text-align: center;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.error {
+    color: red;
+    margin-top: 20px;
+}
