@@ -1,0 +1,22 @@
+body {
+    text-align: center;
+    border: 1px solid red;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#inputPoke {
+    font-size: 30px;
+    color: chocolate;
+}
+
+#search-btn {
+    font-size: 30px;
+    color: crimson;
+    background-color: rgb(157, 174, 182);
+    border-radius: 10px;
+    &:hover{
+        cursor: pointer;
+        /* font-size: 35px; */
+        color: rgb(255, 102, 0);
+    }
+}
