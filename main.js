@@ -9,29 +9,54 @@ const searchPokemon = async (evento) => {
     evento.preventDefault();
     const inputEntered = inputID.value.trim();
     // console.log(inputEntered)
+    renderCard.innerHTML = '';
 
     // VALIDACION DEL INPUT
-    if (!inputEntered || isNaN(inputEntered) || inputEntered <= 0){
-        renderCard.innerHTML = '<p class="error">Numero no valido</p>'
+
+    const ID = parseInt(inputEntered, 10); //convertir a numero
+
+    if(isNaN(ID)){
+        renderCard.innerHTML = '<p class="error">el ID ingresado debe ser numerico</p>'
         inputID.value = '';
-        return;
-    }else {
-        renderCard.innerHTML = '';
-    }
+        
+    } 
+    if(ID <= 0){
+        renderCard.innerHTML = '<p class="error">el ID debe ser mayor a cero</p>'
+        inputID.value = '';
+        
+    } 
 
     //LLAMADO A LA API
 
-    try {
-        const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${inputEntered}`);
-        if (!data.ok) {
-            throw new Error('Pokémon no encontrado');
+    try { 
+        const data = await fetch (`https://pokeapi.co/api/v2/pokemon/${ID}`);
+        if(!data.ok){
+            throw new Error ("Pokemon no encontrado");
         }
         const pokemon = await data.json();
-        renderPokemonCard(pokemon);
+        // console.log(pokemon)
+
+        const name = pokemon.name;
+        const types = pokemon.types.map(typeInfo => typeInfo.type.name).join(", ");
+        const height = pokemon.height / 10; // Convertir a metros
+        const weight = pokemon.weight / 10; // Convertir a kilogramos
+        const image = pokemon.sprites.front_default;
+
+
+        renderCard.innerHTML = `
+            <div class="pokemon-info">
+                <img src="${image}" alt="${name}" />
+                <h2>${name.charAt(0).toUpperCase() + name.slice(1)}</h2>
+                <p><strong>Tipo:</strong> ${types}</p>
+                <p><strong>Altura:</strong> ${height} m</p>
+                <p><strong>Peso:</strong> ${weight} kg</p>
+            </div>
+        `;
+        
     } catch (error) {
-        resultContainer.innerHTML = '<div class="error">Error: Pokémon no encontrado.</div>';
+        renderCardCard.innerHTML = `<p class="error">${error.message}</p>`;
     }
-  
+
 }
 
 
