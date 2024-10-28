@@ -31,7 +31,7 @@ const searchPokemon = async (evento) => {
     try { 
         const data = await fetch (`https://pokeapi.co/api/v2/pokemon/${ID}`);
         if(!data.ok){
-            throw new Error ("Pokemon no encontrado");
+            throw new Error("Pokemon no encontrado,putito");
         }
         const pokemon = await data.json();
         // console.log(pokemon)
@@ -54,9 +54,9 @@ const searchPokemon = async (evento) => {
         `;
         
     } catch (error) {
-        renderCardCard.innerHTML = `<p class="error">${error.message}</p>`;
+        renderCard.innerHTML = `<p class="error">${error.message}</p>`;
     }
-
+    // renderCard.innerHTML = ''
 }
 
 
